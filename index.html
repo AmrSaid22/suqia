@@ -9,59 +9,35 @@
     <style>
         :root { --primary: #0077b6; --secondary: #caf0f8; --dark: #03045e; }
         body { font-family: 'Cairo', sans-serif; margin: 0; background: #f8f9fa; color: var(--dark); text-align: center; }
-        header { background: linear-gradient(rgba(0,119,182,0.8), rgba(3,4,94,0.9)), url('https://images.unsplash.com/photo-1489440543286-a69330151c0b?auto=format&fit=crop&w=1350&q=80'); background-size: cover; color: white; padding: 120px 20px; }
-        .stats-container { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: -60px; }
-        .stat-card { background: white; padding: 35px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); min-width: 220px; transition: 0.4s; border-bottom: 5px solid var(--primary); }
-        .stat-card:hover { transform: translateY(-15px); }
-        .stat-card i { font-size: 3.5rem; color: var(--primary); margin-bottom: 15px; }
-        .stat-number { font-size: 2.8rem; font-weight: bold; display: block; color: var(--dark); }
-        .section { padding: 100px 20px; max-width: 1000px; margin: auto; line-height: 1.8; }
-        .icon-box { font-size: 4.5rem; color: var(--primary); margin-bottom: 25px; }
-        h2 { font-size: 2.2rem; color: var(--dark); }
-        .whatsapp-btn { position: fixed; bottom: 30px; left: 30px; background: #25d366; color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); text-decoration: none; z-index: 1000; transition: 0.3s; }
-        footer { background: var(--dark); color: white; padding: 30px; font-size: 1rem; margin-top: 50px; }
+        header { background: linear-gradient(rgba(0,119,182,0.8), rgba(3,4,94,0.9)), url('https://images.unsplash.com/photo-1489440543286-a69330151c0b?auto=format&fit=crop&w=1350&q=80'); background-size: cover; color: white; padding: 100px 20px; }
+        .stats-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: -50px; padding: 0 10px; }
+        .stat-card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); min-width: 200px; flex: 1; max-width: 280px; }
+        .stat-card i { font-size: 3rem; color: var(--primary); margin-bottom: 10px; }
+        .stat-number { font-size: 2.5rem; font-weight: bold; display: block; color: var(--dark); }
+        .section { padding: 60px 20px; max-width: 900px; margin: auto; }
+        .whatsapp-btn { position: fixed; bottom: 25px; left: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        footer { background: var(--dark); color: white; padding: 20px; margin-top: 40px; }
     </style>
 </head>
 <body>
     <header>
         <h1>مبادرة سُقيا إفريقيا (Suqia Africa)</h1>
-        <p>استثمار التكنولوجيا لتأمين المياه النظيفة في المناطق الأكثر جفافاً في القارة السمراء</p>
+        <p>استثمار التكنولوجيا لتأمين المياه النظيفة في المناطق الأكثر جفافاً</p>
     </header>
     <div class="stats-container">
-        <div class="stat-card">
-            <i class="fas fa-users"></i>
-            <span class="stat-number" data-target="1200">0</span>
-            <p>مستفيد في قرى جنوب القارة</p>
-        </div>
-        <div class="stat-card">
-            <i class="fas fa-fill-drip"></i>
-            <span class="stat-number" data-target="3">0</span>
-            <p>آبار ارتوازية مستدامة</p>
-        </div>
-        <div class="stat-card">
-            <i class="fas fa-globe-africa"></i>
-            <span class="stat-number" data-target="100">0</span>
-            <p>% وصول مباشر للمتضررين</p>
-        </div>
+        <div class="stat-card"><i class="fas fa-users"></i><span class="stat-number">1200</span><p>مستفيد في قرى جنوب القارة</p></div>
+        <div class="stat-card"><i class="fas fa-fill-drip"></i><span class="stat-number">3</span><p>آبار ارتوازية مستدامة</p></div>
+        <div class="stat-card"><i class="fas fa-globe-africa"></i><span class="stat-number">100%</span><p>وصول مباشر للمتضررين</p></div>
     </div>
     <div class="section">
-        <div class="icon-box"><i class="fas fa-project-diagram"></i></div>
         <h2>رؤية هندسية لأزمة المياه</h2>
         <p>مهمتنا تتجاوز مجرد حفر الآبار؛ نحن نعتمد على تحليل البيانات الجغرافية وإحصائيات الجفاف لضمان توفير حلول مائية مستدامة. من خلال دعم العائلة والأصدقاء، استطعنا تحويل التبرعات البسيطة إلى مشاريع تقنية تخدم مئات الأسر في قلب إفريقيا.</p>
     </div>
-    <a href="https://wa.me/966557131253" class="whatsapp-btn" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-    <footer>مبادرة سُقيا إفريقيا | تقنية من أجل الإنسانية © 2026</footer>
-    <script>
-        const counters = document.querySelectorAll('.stat-number');
-        counters.forEach(counter => {
-            const updateCount = () => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const speed = 250; 
-                const inc = target / speed;
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(updateCount, 15);
-                } else {
+    <div class="section" style="background: #fff; border-radius: 20px; margin-bottom: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+        <h3>عن مؤسس المبادرة</h3>
+        <p><strong>عمرو سعيد</strong> - مهتم بتسخير الحلول الهندسية والبرمجية لمواجهة التحديات الإنسانية. أطلقت هذه المنصة لتوثيق أثر "سُقيا إفريقيا" وضمان استدامة المشاريع الميدانية.</p>
+    </div>
+    <a href="https://wa.me/966557131253" class="whatsapp-btn"><i class="fab fa-whatsapp"></i></a>
+    <footer>مبادرة سُقيا إفريقيا © 2026 | تطوير: عمرو سعيد</footer>
+</body>
+</html>
