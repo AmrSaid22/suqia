@@ -1,4 +1,65 @@
-<h3 style="color: var(--primary);"><i class="fas fa-user-check"></i> تقرير ورؤية المؤسس</h3>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مبادرة سُقيا إفريقيا | Suqia Africa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #0077b6; --secondary: #caf0f8; --dark: #03045e; --accent: #00b4d8; }
+        body { font-family: 'Cairo', sans-serif; margin: 0; background: #f8f9fa; color: var(--dark); text-align: center; }
+        header { background: linear-gradient(rgba(0,119,182,0.8), rgba(3,4,94,0.9)), url('https://images.unsplash.com/photo-1489440543286-a69330151c0b?auto=format&fit=crop&w=1350&q=80'); background-size: cover; color: white; padding: 100px 20px; }
+        .stats-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: -50px; padding: 0 10px; }
+        .stat-card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); min-width: 200px; flex: 1; max-width: 280px; }
+        .stat-card i { font-size: 3rem; color: var(--primary); margin-bottom: 10px; }
+        .stat-number { font-size: 2.5rem; font-weight: bold; display: block; color: var(--dark); }
+        .section { padding: 60px 20px; max-width: 900px; margin: auto; }
+        
+        /* تصميم كروت التقارير */
+        .report-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 30px; }
+        .report-card { background: #fff; padding: 25px; border-radius: 15px; border: 1px solid #eee; text-align: right; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .report-tag { background: var(--secondary); color: var(--primary); padding: 5px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: bold; }
+        
+        /* تصميم صندوق المؤسس المطور */
+        .founder-box { background: white; padding: 40px; border-radius: 25px; margin: 40px auto; box-shadow: 0 15px 35px rgba(0,0,0,0.05); border-right: 5px solid var(--primary); text-align: right; }
+        
+        .whatsapp-btn { position: fixed; bottom: 25px; left: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        footer { background: var(--dark); color: white; padding: 20px; margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>مبادرة سُقيا إفريقيا (Suqia Africa)</h1>
+        <p>استثمار التكنولوجيا لتأمين المياه النظيفة في المناطق الأكثر جفافاً</p>
+    </header>
+
+    <div class="stats-container">
+        <div class="stat-card"><i class="fas fa-users"></i><span class="stat-number">1200</span><p>مستفيد في قرى جنوب القارة</p></div>
+        <div class="stat-card"><i class="fas fa-fill-drip"></i><span class="stat-number">3</span><p>آبار ارتوازية مستدامة</p></div>
+        <div class="stat-card"><i class="fas fa-globe-africa"></i><span class="stat-number">100%</span><p>وصول مباشر للمتضررين</p></div>
+    </div>
+
+    <div class="section">
+        <h2>📊 تقارير الأثر الميداني (2026)</h2>
+        <p>نعتمد الشفافية والبيانات الهندسية لتوثيق كل قطرة مياه نؤمنها.</p>
+        <div class="report-grid">
+            <div class="report-card">
+                <span class="report-tag">مكتمل</span>
+                <h3>بئر "النور" - مالاوي</h3>
+                <p>العمق: 45 متر. يخدم 500 شخص. تم تحليل جودة التربة لضمان استدامة المياه الصالحة للشرب.</p>
+            </div>
+            <div class="report-card">
+                <span class="report-tag">مكتمل</span>
+                <h3>بئر "الكرامة" - تشاد</h3>
+                <p>يعمل بمضخة شمسية حديثة. يوفر المياه لمدرسة محلية ومركز صحي في المنطقة.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="founder-box">
+                    <h3 style="color: var(--primary);"><i class="fas fa-user-check"></i> تقرير ورؤية المؤسس</h3>
             <p style="font-size: 1.1rem; line-height: 1.8;">
                 <strong>عمرو سعيد</strong> - بصفتي مؤسس المبادرة، أسعى لدمج الهندسة البرمجية بالعمل الإنساني. 
                 أطلقت هذه المنصة لتكون مرجعاً تقنياً يضمن شفافية توزيع الموارد وتوثيق أثر <strong>"سُقيا إفريقيا"</strong> في الميدان. هدفنا هو الابتكار من أجل حياة كريمة لكل إنسان.
