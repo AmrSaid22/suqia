@@ -2,156 +2,158 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Suqia Africa AI | Ultimate Dashboard</title>
+    <title>Suqia Africa | Ultimate System v7.0</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root { --main: #00b4d8; --bg: #0b0f1a; --card: #161c2d; --text: #f0fdfa; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: var(--text); margin: 0; text-align: center; }
+        
+        /* Navigation */
         nav { display: flex; justify-content: space-between; padding: 15px 5%; background: var(--card); border-bottom: 2px solid var(--main); position: sticky; top: 0; z-index: 1000; }
+        .nav-logo { font-weight: bold; color: var(--main); font-size: 1.2rem; }
+
+        /* Landing Page Sections */
+        .hero { padding: 50px 20px; background: radial-gradient(circle at top, #0077b622, transparent); }
+        .live-counter { font-size: 3.5rem; font-weight: bold; color: var(--main); font-family: monospace; text-shadow: 0 0 10px rgba(0,180,216,0.3); }
+
+        .main-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; padding: 20px 5%; max-width: 1200px; margin: auto; }
+        .card { background: var(--card); border-radius: 15px; padding: 25px; border: 1px solid #2d3748; text-align: right; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
         
-        /* Landing Page Style */
-        .landing-view { display: block; }
-        .hero { padding: 60px 20px; text-align: center; background: radial-gradient(circle at top, #0077b622, transparent); }
-        .live-counter { font-size: 3.5rem; font-weight: bold; color: var(--main); font-family: monospace; }
-        
-        .main-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; padding: 20px 5%; max-width: 1300px; margin: auto; }
-        .card { background: var(--card); border-radius: 15px; padding: 25px; border: 1px solid #2d3748; box-shadow: 0 10px 30px rgba(0,0,0,0.4); text-align: right; }
-        #map { height: 400px; width: 100%; border-radius: 12px; margin-top: 15px; background: #0d1117; }
-        
-        /* Dashboard View Style (Hidden by default) */
-        #dashboard-view { display: none; padding: 30px 5%; max-width: 1200px; margin: auto; animation: fadeIn 0.8s ease; }
+        /* Map UI */
+        #map { height: 400px; width: 100%; border-radius: 12px; margin-top: 15px; background: #0d1117; z-index: 1; }
+
+        /* Dashboard (Hidden Initially) */
+        #dashboard-view { display: none; padding: 30px 5%; max-width: 1100px; margin: auto; animation: slideUp 0.6s ease; }
         .db-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
-        .db-card { background: var(--card); border-radius: 12px; padding: 20px; border: 1px solid #2d3748; }
-        .stat-val { font-size: 2rem; font-weight: bold; color: var(--main); }
         
+        /* UI Components */
         input { width: 100%; padding: 12px; margin: 10px 0; background: #0b0f1a; border: 1px solid #4a5568; color: white; border-radius: 8px; box-sizing: border-box; }
-        .btn { width: 100%; padding: 12px; background: var(--main); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .btn:hover { background: #0077b6; transform: scale(1.02); }
-        
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .btn { width: 100%; padding: 12px; background: var(--main); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 1rem; }
+        .btn:hover { background: #0077b6; transform: translateY(-2px); }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
     </style>
-    </head>
+</head>
 <body>
 
     <nav>
-        <div style="color: var(--main); font-weight: bold;">SUQIA_CORE_v6</div>
-        <div id="nav-status"><i class="fas fa-circle" style="color: #718096;"></i> OFFLINE</div>
+        <div class="nav-logo">SUQIA_ENGINE_V7</div>
+        <div id="status-tag" style="font-family: monospace; color: #718096;">[ SYSTEM_READY ]</div>
     </nav>
 
     <div id="landing-view">
         <section class="hero">
-            <div style="color: var(--main); font-size: 0.8rem; letter-spacing: 2px;">LIVE GLOBAL WATER FEED</div>
-            <div class="live-counter" id="water-counter">1,450,230</div>
-            <p>لتر مياه تم توثيق ضخها عبر النظام الذكي</p>
+            <div style="color: var(--main); font-size: 0.9rem;">STREAMING LIVE DATA</div>
+            <div class="live-counter" id="water-display">1,450,230</div>
+            <p>لتر مياه نقية تم ضخها عبر شبكة سُقيا الذكية</p>
         </section>
 
         <div class="main-grid">
             <div class="card">
-                <h3><i class="fas fa-map-marked-alt"></i> التتبع الجغرافي</h3>
+                <h3><i class="fas fa-satellite"></i> التتبع الميداني (Live Map)</h3>
                 <div id="map"></div>
             </div>
+
             <div class="card">
-                <h3><i class="fas fa-user-shield"></i> بوابة المتطوعين</h3>
-                <input type="text" id="userName" placeholder="الاسم الكامل">
-                <input type="email" id="userEmail" placeholder="البريد الإلكتروني">
-                <button class="btn" onclick="executeLogin()">دخول لوحة التحكم</button>
+                <h3><i class="fas fa-lock"></i> تسجيل الدخول</h3>
+                <p style="font-size: 0.8rem; color: #a0aec0;">سجل دخولك لاستعراض بيانات الأثر الشخصي</p>
+                <input type="text" id="uName" placeholder="الاسم الكامل">
+                <input type="email" id="uEmail" placeholder="البريد الإلكتروني">
+                <button class="btn" onclick="appLogin()">دخول لوحة التحكم</button>
             </div>
         </div>
     </div>
 
     <div id="dashboard-view">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-            <h2 id="welcome-msg"></h2>
-            <button class="btn" style="width: auto; background: #e53e3e;" onclick="location.reload()">تسجيل الخروج</button>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 id="greet-user" style="color: var(--main);"></h2>
+            <button class="btn" style="width: auto; background: #e53e3e;" onclick="location.reload()">تسجيل خروج</button>
         </div>
 
         <div class="db-grid">
-            <div class="db-card">
-                <h4><i class="fas fa-chart-line"></i> استهلاك المياه (أسبوعي)</h4>
-                <canvas id="dbChart" height="200"></canvas>
+            <div class="card" style="text-align: center;">
+                <h4><i class="fas fa-chart-area"></i> معدل التدفق الأسبوعي</h4>
+                <canvas id="myChart" height="200"></canvas>
             </div>
-            <div class="db-card" style="text-align: center;">
-                <h4><i class="fas fa-tint"></i> مساهمتك الشخصية</h4>
-                <div class="stat-val">450 لتر</div>
-                <p>تم توجيهها لـ 15 أسرة في
-                    ‎تشاد</p>
-                <hr style="border-color: #2d3748;">
-                <h4><i class="fas fa-shield-alt"></i> حالة البئر التابع لك</h4>
-                <div style="color: #2ecc71;"><i class="fas fa-check-circle"></i> يعمل بكفاءة 100%</div>
+            
+            <div class="card" style="text-align: center;">
+                <h4><i class="fas fa-tint"></i> مساهمتك الفعلية</h4>
+                <div style="font-size: 2.5rem; font-weight: bold; color: var(--main);">520 لتر</div>
+                <p>تم توفيرها لـ 18 عائلة في مالي</p>
+                <hr style="border: 0; border-top: 1px solid #2d3748; margin: 20px 0;">
+                <div style="color: #2ecc71;"><i class="fas fa-check-circle"></i> حالة البئر: متصل 100%</div>
             </div>
         </div>
 
-        <div class="db-card" style="margin-top: 20px;">
-            <h4><i class="fas fa-history"></i> آخر سجلات النظام (Logs)</h4>
-            <div style="font-family: monospace; font-size: 0.8rem; background: #0b0f1a; padding: 15px; border-radius: 8px; color: #a0aec0;">
-                > [12:43:01] Pump #04 Active - Flow: 12L/m <br>
-                > [12:41:55] AI Optimization: Solar Tracking Enabled <br>
-                > [12:35:20] User Login: Session Established
-            </div>
+        <div class="card" style="margin-top: 20px; font-family: monospace; font-size: 0.8rem;">
+            <div style="color: #a0aec0;">> [LOG] DATA_SYNC_COMPLETE | PUMP_INTEGRITY: NORMAL | AI_MODE: ACTIVE</div>
         </div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-‎        // 1. العداد
-        let waterVal = 1450230;
+        // 1. العداد (يشتغل فوراً)
+        let total = 1450230;
         setInterval(() => {
-            waterVal += Math.floor(Math.random() * 3) + 1;
-            const el = document.getElementById('water-counter');
-            if(el) el.innerText = waterVal.toLocaleString();
+            total += Math.floor(Math.random() * 3) + 1;
+            const el = document.getElementById('water-display');
+            if(el) el.innerText = total.toLocaleString();
         }, 2000);
 
-‎        // 2. الخريطة
+        // 2. الخريطة (Leaflet)
         let map;
         try {
             map = L.map('map').setView([5.0, 20.0], 3);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-            L.marker([-13.25, 34.30]).addTo(map).bindPopup("بئر النور");
-            L.marker([15.45, 18.73]).addTo(map).bindPopup("بئر الكرامة");
-        } catch(e) {}
+            L.marker([-13.25, 34.30]).addTo(map).bindPopup("بئر النور - مالاوي");
+            L.marker([15.45, 18.73]).addTo(map).bindPopup("بئر الكرامة - تشاد");
+        } catch(e) { console.log("Map error (Probably offline)"); }
 
-‎        // 3. منطق الدخول والـ Dashboard
-        function executeLogin() {
-            const name = document.getElementById('userName').value;
-            if (name.trim() !== "") {
-‎                // الانتقال بين الواجهات
+        // 3. منطق الدخول والـ Dashboard
+        function appLogin() {
+            const name = document.getElementById('uName').value;
+            const email = document.getElementById('uEmail').value;
+
+            if(name.trim() !== "" && email.trim() !== "") {
+                // إخفاء الـ Landing وإظهار الـ Dashboard
                 document.getElementById('landing-view').style.display = 'none';
                 document.getElementById('dashboard-view').style.display = 'block';
                 
-‎                // تحديث البيانات
-                document.getElementById('welcome-msg').innerText = "لوحة تحكم: " + name;
-                document.getElementById('nav-status').innerHTML = <i class="fas fa-circle" style="color: #2ecc71;"></i> متصل: ${name};
+                // تحديث البيانات
+                document.getElementById('greet-user').innerText = "لوحة تحكم: " + name;
+                document.getElementById('status-tag').innerText = "[ AUTH_SUCCESS: " + name.toUpperCase() + " ]";
+                document.getElementById('status-tag').style.color = "#2ecc71";
 
-‎                // تشغيل الرسم البياني
-                initChart();
+                // تشغيل الرسم البياني بعد ما الصفحة تظهر
+                renderChart();
             } else {
-                alert("اكتب اسمك عشان تدخل اللعبة!");
+                alert("برجاء إدخال البيانات كاملة للتجربة.");
             }
         }
 
-        function initChart() {
-            const ctx = document.getElementById('dbChart').getContext('2d');
+        function renderChart() {
+            const ctx = document.getElementById('myChart').getContext('2d');
             new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
                     datasets: [{
-                        label: 'اللترات',
-                        data: [1200, 1900, 3000, 2500, 2200, 3500, 2800],
+                        data: [15, 25, 10, 35, 20, 45, 30],
                         borderColor: '#00b4d8',
-                        tension: 0.4,
+                        backgroundColor: 'rgba(0, 180, 216, 0.1)',
                         fill: true,
-                        backgroundColor: 'rgba(0, 180, 216, 0.1)'
+                        tension: 0.4
                     }]
                 },
                 options: {
                     responsive: true,
                     plugins: { legend: { display: false } },
-                    scales: { y: { display: false }, x: { ticks: { color: '#a0aec0' } } }
+                    scales: { y: { display: false }, x: { ticks: { color: '#718096' } } }
                 }
             });
         }
