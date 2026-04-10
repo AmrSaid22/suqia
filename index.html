@@ -3,96 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suqia | تقنية لإرواء العطش</title>
-    <!-- Tailwind CSS for Modern UI -->
+    <title>Suqia | Tech for Humanity</title>
     <script src="https://tailwindcss.com"></script>
-    <!-- Chart.js for Data Visualization -->
     <script src="https://jsdelivr.net"></script>
+    <link rel="stylesheet" href="https://cloudflare.com""")/>>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
-        body { font-family: 'Tajawal', sans-serif; }
-        .hero-gradient { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+        body { font-family: 'Plus Jakarta Sans', 'Tajawal', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .hero-mesh { background-color: #020617; background-image: radial-gradient(at 0% 0%, rgba(30, 58, 138, 0.5) 0, transparent 50%), radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.3) 0, transparent 50%); }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-[#020617] text-gray-100 selection:bg-blue-500">
 
     <!-- Navigation -->
-    <nav class="bg-white shadow-md p-4 sticky top-0 z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-blue-600">SUQIA 💧</h1>
-            <div class="space-x-reverse space-x-6">
-                <a href="#impact" class="hover:text-blue-500">أثرنا</a>
-                <a href="#tech" class="hover:text-blue-500">الجانب التقني</a>
-                <button class="bg-blue-600 text-white px-6 py-2 rounded-full font-bold hover:bg-blue-700 transition">تبرع الآن</button>
-            </div>
+    <nav class="fixed w-full z-50 glass mt-4 mx-auto max-w-5xl left-0 right-0 rounded-full px-6 py-3 flex justify-between items-center animate__animated animate__fadeInDown">
+        <div class="text-xl font-extrabold tracking-tighter text-blue-400">SUQIA.TECH <span class="text-[10px] bg-blue-500/20 px-2 py-1 rounded text-blue-300 ml-2 uppercase">Beta v2.0</span></div>
+        <div class="hidden md:flex gap-8 text-sm font-medium">
+            <a href="#mission" class="hover:text-blue-400 transition">المهمة</a>
+            <a href="#data" class="hover:text-blue-400 transition">البيانات الحية</a>
+            <a href="#impact" class="hover:text-blue-400 transition">الأثر الميداني</a>
         </div>
+        <a href="https://github.com" class="bg-blue-600 hover:bg-blue-500 px-5 py-2 rounded-full text-sm font-bold transition shadow-lg shadow-blue-900/20">GitHub Source</a>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-gradient text-white py-20 px-6">
-        <div class="container mx-auto text-center">
-            <h2 class="text-5xl font-bold mb-6">البرمجة في خدمة الإنسانية</h2>
-            <p class="text-xl mb-8 opacity-90">مشروع "سقيا" لربط التكنولوجيا بمشاريع توفير المياه النظيفة في أفريقيا ومصر.</p>
-            <div class="flex justify-center gap-4">
-                <div class="bg-white/20 p-6 rounded-xl backdrop-blur-md">
-                    <span class="block text-3xl font-bold">1200+</span>
-                    <span class="text-sm">لتر ماء يومياً</span>
+    <section class="min-h-screen flex items-center justify-center pt-20 hero-mesh px-6">
+        <div class="max-w-4xl text-center">
+            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight animate__animated animate__fadeInUp">
+                نطوع <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">التكنولوجيا</span> لخدمة الإنسانية
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto animate__animated animate__fadeInUp animate__delay-1s">
+                منصة برمجية لتحليل احتياجات المياه في المناطق النائية بأفريقيا ومصر، وربط الموارد بالاحتياجات الحقيقية عبر البيانات.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="glass p-6 rounded-2xl w-40">
+                    <div class="text-3xl font-bold text-blue-400">100%</div>
+                    <div class="text-xs text-gray-500 uppercase mt-2 italic tracking-widest">Transparency</div>
                 </div>
-                <div class="bg-white/20 p-6 rounded-xl backdrop-blur-md">
-                    <span class="block text-3xl font-bold">15+</span>
-                    <span class="text-sm">بئر محفور</span>
+                <div class="glass p-6 rounded-2xl w-40">
+                    <div class="text-3xl font-bold text-cyan-400">472</div>
+                    <div class="text-xs text-gray-500 uppercase mt-2 italic tracking-widest">Community Reach</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Impact Chart (The CS Edge) -->
-    <section id="impact" class="py-16 container mx-auto px-6">
-        <h3 class="text-3xl font-bold text-center mb-12">تحليل البيانات والأثر</h3>
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div class="bg-white p-8 rounded-2xl shadow-lg">
-                <canvas id="impactChart"></canvas>
-            </div>
-            <div>
-                <h4 class="text-2xl font-bold mb-4 text-blue-800">لماذا هذا المشروع؟</h4>
-                <ul class="space-y-4 text-gray-700">
-                    <li class="flex items-center">✅ <span>تحسين كفاءة توزيع التبرعات بنسبة 40%</span></li>
-                    <li class="flex items-center">✅ <span>تتبع جغرافي دقيق لمواقع الآبار (GIS Integration)</span></li>
-                    <li class="flex items-center">✅ <span>شفافية كاملة عبر تقارير برمجية لحظية</span></li>
-                </ul>
+    <!-- Data Analytics Section (The CS Part) -->
+    <section id="data" class="py-24 px-6 bg-slate-950/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="animate__animated animate__fadeInLeft">
+                    <h2 class="text-3xl font-bold mb-6">التحليل البياني للأثر (Live Data)</h2>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        بصفتي مبرمجاً، لا أكتفي بجمع التبرعات؛ بل أقوم ببناء نماذج بيانات لتتبع كفاءة كل بئر تم حفره وقياس العائد الاجتماعي لكل دولار يتم إنفاقه.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                            <span>تتبع عبر الأقمار الصناعية (GIS)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-cyan-500 rounded-full"></div>
+                            <span>خوارزميات تحسين الموارد</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass p-8 rounded-3xl animate__animated animate__fadeInRight">
+                    <canvas id="impactChart"></canvas>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Project Timeline -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-6 text-center">
-            <p class="mb-4">تطوير: عمرو سعيد | CS Applicant 2024</p>
-            <div class="flex justify-center space-x-4">
-                <a href="https://github.com" class="opacity-70 hover:opacity-100">GitHub Repository</a>
+    <!-- Project Gallery -->
+    <section id="impact" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto text-center mb-16">
+            <h2 class="text-4xl font-bold">الأثر على الأرض</h2>
+            <div class="h-1 w-20 bg-blue-600 mx-auto mt-4 rounded-full"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="group relative overflow-hidden rounded-2xl aspect-square">
+                <img src="https://unsplash.com" class="object-cover w-full h-full group-hover:scale-110 transition duration-500 opacity-60 group-hover:opacity-100">
+                <div class="absolute bottom-0 p-6 bg-gradient-to-t from-black to-transparent w-full">
+                    <h4 class="font-bold">آبار مصر</h4>
+                    <p class="text-xs text-gray-400">تطوير البنية التحتية للمياه</p>
+                </div>
+            </div>
+            <div class="group relative overflow-hidden rounded-2xl aspect-square">
+                <img src="https://unsplash.com" class="object-cover w-full h-full group-hover:scale-110 transition duration-500 opacity-60 group-hover:opacity-100">
+                <div class="absolute bottom-0 p-6 bg-gradient-to-t from-black to-transparent w-full">
+                    <h4 class="font-bold">تطوع أفريقيا</h4>
+                    <p class="text-xs text-gray-400">توزيع الموارد الأساسية</p>
+                </div>
+            </div>
+            <div class="group relative overflow-hidden rounded-2xl aspect-square">
+                <img src="https://unsplash.com" class="object-cover w-full h-full group-hover:scale-110 transition duration-500 opacity-60 group-hover:opacity-100">
+                <div class="absolute bottom-0 p-6 bg-gradient-to-t from-black to-transparent w-full">
+                    <h4 class="font-bold">التعليم والوعي</h4>
+                    <p class="text-xs text-gray-400">بناء قدرات المجتمعات المحلية</p>
+                </div>
             </div>
         </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5 text-center text-gray-500 text-sm">
+        <p>&copy; 2024 Amr Said | Future CS Student | Built with Code & Passion</p>
     </footer>
 
     <script>
-        // Chart Logic - Shows you know how to handle JS Objects
+        // Data Visualization Logic
         const ctx = document.getElementById('impactChart').getContext('2d');
         new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                labels: ['2020', '2021', '2022', '2023', '2024'],
                 datasets: [{
-                    label: 'عدد المستفيدين من المياه النظيفة',
-                    data: [150, 300, 450, 700, 950, 1200],
+                    label: 'المستفيدين (ألف)',
+                    data: [1.2, 2.5, 4.8, 8.2, 12.5],
+                    backgroundColor: 'rgba(59, 130, 246, 0.5)',
                     borderColor: '#3b82f6',
-                    tension: 0.4,
-                    fill: true,
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)'
+                    borderWidth: 2,
+                    borderRadius: 8
                 }]
             },
             options: {
                 responsive: true,
-                plugins: { legend: { position: 'top' } }
+                scales: {
+                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#64748b' } },
+                    x: { grid: { display: false }, ticks: { color: '#64748b' } }
+                },
+                plugins: {
+                    legend: { labels: { color: '#f1f5f9', font: { family: 'Tajawal' } } }
+                }
             }
         });
     </script>
