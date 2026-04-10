@@ -114,5 +114,50 @@
             alert('هذه الواجهة مبرمجة لمحاكاة Firebase Auth في التقديم الجامعي.');
         }
     </script>
+    <script>
+    // 1. محاكاة العداد (شغال تلقائي)
+    let liters = 1450230;
+    setInterval(() => {
+        liters += Math.floor(Math.random() * 5);
+        const el = document.getElementById('totalLiters');
+        if(el) el.innerText = liters.toLocaleString();
+    }, 2000);
+
+    // 2. تشغيل نقاط الخريطة (تأكد أن الـ ID موجود)
+    function showWell(name, speed, status) {
+        const panel = document.getElementById('wellInfo');
+        const nameEl = document.getElementById('wellName');
+        const statsEl = document.getElementById('wellStats');
+        
+        if(panel && nameEl && statsEl) {
+            panel.style.display = 'block'; // إظهار اللوحة
+            nameEl.innerText = name;
+            statsEl.innerText = معدل الضخ الحالي: ${speed} | الحالة الفنية: ${status};
+            
+            // إضافة تأثير بصري عشان تعرف إنك ضغطت
+            panel.style.animation = 'none';
+            panel.offsetHeight; /* trigger reflow */
+            panel.style.animation = 'pulse 0.5s';
+        }
+    }
+
+    // 3. تشغيل تسجيل الدخول
+    function mockLogin() {
+        const loginForm = document.getElementById('loginForm');
+        const userImpact = document.getElementById('userImpact');
+        
+        if(loginForm && userImpact) {
+            loginForm.style.display = 'none'; // إخفاء الفورم
+            userImpact.style.display = 'block'; // إظهار لوحة المتبرع
+            alert('أهلاً بك يا عمرو! تم الدخول بنجاح إلى قاعدة بيانات سُقيا.');
+        } else {
+            alert('خطأ في تحميل العناصر، تأكد من نسخ الكود كاملاً.');
+        }
+    }
+
+    function toggleAuth() {
+        alert('هذه الواجهة مبرمجة لمحاكاة الربط مع Firebase Auth.');
+    }
+</script>
 </body>
 </html>
