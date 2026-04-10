@@ -2,164 +2,103 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Suqia Africa AI | Professional CS Dashboard</title>
+    <title>Suqia Africa | AI Systems v5.0</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
         :root { --main: #00b4d8; --bg: #0b0f1a; --card: #161c2d; --text: #f0fdfa; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: var(--text); margin: 0; overflow-x: hidden; }
-        
-        /* Navigation */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: var(--card); border-bottom: 2px solid var(--main); position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--main); font-family: 'Courier New', Courier, monospace; }
-        
-        /* Hero & Stats */
-        .hero { text-align: center; padding: 50px 20px; background: linear-gradient(to bottom, #0077b622, transparent); }
-        .live-counter { font-size: 4rem; font-weight: bold; color: var(--main); text-shadow: 0 0 15px var(--main); font-family: 'monospace'; }
-
-        .main-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; padding: 20px 5%; max-width: 1400px; margin: auto; }
-        .card { background: var(--card); border-radius: 15px; padding: 25px; border: 1px solid #2d3748; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-
-        /* Map UI */
-        #map { height: 450px; width: 100%; border-radius: 12px; border: 2px solid #2d3748; }
-
-        /* Auth System UI */
-        .form-group { margin-bottom: 15px; text-align: right; }
-        input { width: 100%; padding: 12px; background: #0b0f1a; border: 1px solid #4a5568; color: white; border-radius: 8px; margin-top: 5px; box-sizing: border-box; }
-        .btn { width: 100%; padding: 12px; background: var(--main); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
-        .btn:hover { background: #0077b6; transform: translateY(-2px); }
-        .logout-btn { background: #e53e3e; margin-top: 20px; }
-
-        .impact-box { background: rgba(0, 180, 216, 0.1); padding: 20px; border-radius: 10px; border-right: 4px solid var(--main); display: none; }
-        
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; text-align: center; }
+        nav { display: flex; justify-content: space-between; padding: 15px 5%; background: var(--card); border-bottom: 2px solid var(--main); }
+        .hero { padding: 40px 20px; background: linear-gradient(to bottom, #0077b611, transparent); }
+        .live-counter { font-size: 3.5rem; font-weight: bold; color: var(--main); margin: 10px 0; font-family: monospace; text-shadow: 0 0 10px rgba(0,180,216,0.3); }
+        .main-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; padding: 20px 5%; max-width: 1300px; margin: auto; }
+        .card { background: var(--card); border-radius: 15px; padding: 25px; border: 1px solid #2d3748; text-align: right; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+        #map { height: 400px; width: 100%; border-radius: 12px; margin-top: 15px; background: #0d1117; }
+        input { width: 100%; padding: 12px; margin: 10px 0; background: #0b0f1a; border: 1px solid #4a5568; color: white; border-radius: 8px; box-sizing: border-box; }
+        .btn { width: 100%; padding: 12px; background: var(--main); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background: #0077b6; transform: scale(1.02); }
+        .profile-box { background: rgba(0, 180, 216, 0.1); padding: 20px; border-radius: 10px; border-right: 4px solid var(--main); display: none; text-align: center; }
         @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo"> > SUQIA_AFRICA_OS </div>
-        <div id="nav-user">جاري تحميل النظام...</div>
+        <div style="color: var(--main); font-weight: bold; letter-spacing: 1px;">SUQIA_CORE_v5</div>
+        <div id="nav-status">STATUS: ONLINE</div>
     </nav>
 
     <section class="hero">
-        <div style="color: var(--main); font-weight: bold;">[ LIVE DATA FEED FROM AFRICA ]</div>
-        <div class="live-counter" id="main-counter">0</div>
-        <p>إجمالي لترات المياه المؤمنة لحظياً (محاكاة قاعدة البيانات)</p>
+        <div style="color: var(--main); font-size: 0.8rem; letter-spacing: 2px;">REAL-TIME IMPACT DATA</div>
+        <div class="live-counter" id="water-counter">1,450,230</div>
+        <p>لتر مياه نقية تم ضخها عبر شبكة آبار سُقيا</p>
     </section>
 
     <div class="main-grid">
         <div class="card">
-            <h3><i class="fas fa-satellite"></i> نظام التتبع الجغرافي (Live Map)</h3>
-            <p style="color: #a0aec0; font-size: 0.9rem; margin-bottom: 15px;">خرائط تفاعلية حقيقية توضح مواقع الآبار وحالتها الفنية.</p>
+            <h3><i class="fas fa-satellite"></i> نظام التتبع الجغرافي للآبار</h3>
             <div id="map"></div>
         </div>
 
         <div class="card">
-            <div id="auth-form">
-                <h3><i class="fas fa-fingerprint"></i> وصول المتطوعين (Authentication)</h3>
-                <div class="form-group">
-                    <label>الاسم</label>
-                    <input type="text" id="reg-name" placeholder="أدخل اسمك">
-                </div>
-                <div class="form-group">
-                    <label>البريد الإلكتروني</label>
-                    <input type="email" id="reg-email" placeholder="name@domain.com">
-                </div>
-                <button class="btn" onclick="handleRegister()">إنشاء حساب وحفظ البيانات</button>
-                <p style="font-size: 0.
-                    8rem; color: #a0aec0; margin-top: 10px;">* يتم حفظ البيانات في LocalStorage لمحاكاة Database.</p>
+            <div id="login-form">
+                <h3><i class="fas fa-user-lock"></i> بوابة المتطوعين</h3>
+                <p style="font-size: 0.8rem; color: #a0aec0;">سجل دخولك لمحاكاة الربط مع قاعدة البيانات.</p>
+                <input type="text" id="userName" placeholder="الاسم الكامل">
+                <input type="email" id="userEmail" placeholder="البريد الإلكتروني">
+                <button class="btn" onclick="executeLogin()">دخول النظام</button>
             </div>
 
-            <div id="user-profile" class="impact-box">
-                <h3><i class="fas fa-user-check"></i> لوحة تحكم المتطوع</h3>
-                <p>مرحباً، <span id="user-display-name" style="color: var(--main); font-weight: bold;"></span></p>
-                <div style="margin: 20px 0;">
-                    <small>أثرك المجتمعي:</small>
-                    <div style="font-size: 1.5rem;">رُويت <strong style="color: var(--main);">12</strong> أسرة اليوم</div>
-                </div>
-                <button class="btn logout-btn" onclick="handleLogout()">تسجيل الخروج</button>
+            <div id="user-profile" class="profile-box">
+                <div style="font-size: 3rem; margin-bottom: 10px;">👤</div>
+                <h3 id="welcome-name" style="margin: 0; color: var(--main);"></h3>
+                <p>مرحباً بك في نظام إدارة الأثر. تم توثيق دخولك بنجاح.</p>
+                <button class="btn" style="background: #e53e3e;" onclick="location.reload()">تسجيل الخروج</button>
             </div>
         </div>
     </div>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // 1. نظام محاكاة قاعدة البيانات (Database Logic)
-        let totalWater = localStorage.getItem('totalWater') ? parseInt(localStorage.getItem('totalWater')) : 1450230;
-        
-        function updateCounter() {
-            totalWater += Math.floor(Math.random() * 5) + 1;
-            document.getElementById('main-counter').innerText = totalWater.toLocaleString();
-            localStorage.setItem('totalWater', totalWater);
+        // 1. منطق العداد
+        let waterVal = 1450230;
+        setInterval(() => {
+            waterVal += Math.floor(Math.random() * 3) + 1;
+            document.getElementById('water-counter').innerText = waterVal.toLocaleString();
+        }, 2000);
+
+        // 2. منطق الخريطة
+        try {
+            const map = L.map('map').setView([5.0, 20.0], 3);
+            L.
+                tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            
+            // نقاط الآبار
+            const wells = [
+                {n: "بئر النور - مالاوي", c: [-13.25, 34.30]},
+                {n: "بئر الكرامة - تشاد", c: [15.45, 18.73]}
+            ];
+            wells.forEach(w => {
+                L.marker(w.c).addTo(map).bindPopup(w.n);
+            });
+        } catch (e) {
+            console.error("Map initialization failed. Check internet connection.");
         }
-        setInterval(updateCounter, 2500);
 
-        // 2. نظام الخرائط الاحترافية (Interactive Map Logic)
-        // إحداثيات أفريقيا الافتراضية
-        const map = L.map('map').setView([5.0, 20.0], 3); 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
+        // 3. منطق تسجيل الدخول
+        function executeLogin() {
+            const name = document.getElementById('userName').value;
+            const email = document.getElementById('userEmail').value;
 
-        // إضافة نقاط (Markers) حقيقية
-        const wells = [
-            { name: "بئر النور", coords: [-13.25, 34.30], status: "يعمل بكفاءة", tech: "مضخة شمسية" },
-            { name: "بئر الكرامة", coords: [15.45, 18.73], status: "صيانة وقائية", tech: "يدوي متطور" },
-            { name: "بئر الأمل", coords: [17.60, 8.08], status: "متصل بالـ AI", tech: "نظام هجين" }
-        ];
-
-        wells.forEach(well => {
-            const marker = L.marker(well.coords).addTo(map);
-            marker.bindPopup(`
-                <div style="text-align:right; font-family:Cairo;">
-                    <b style="color:#00b4d8">${well.name}</b><br>
-                    الحالة: ${well.status}<br>
-                    التقنية: ${well.tech}<br>
-                    <button style="margin-top:5px; cursor:pointer">عرض التفاصيل</button>
-                </div>
-            `);
-        });
-
-        // 3. نظام المستخدمين (Authentication Logic)
-        function checkAuth() {
-            const user = JSON.parse(localStorage.getItem('suqiaUser'));
-            const navUser = document.getElementById('nav-user');
-            if (user) {
-                document.getElementById('auth-form').style.display = 'none';
+            if (name.trim() !== "" && email.trim() !== "") {
+                document.getElementById('login-form').style.display = 'none';
                 document.getElementById('user-profile').style.display = 'block';
-                document.getElementById('user-display-name').innerText = user.name;
-                navUser.innerHTML = <i class="fas fa-circle" style="color:#2ecc71; font-size:10px"></i> متصل: ${user.name};
+                document.getElementById('welcome-name').innerText = "أهلاً، " + name;
+                document.getElementById('nav-status').innerText = "LOGGED_IN: " + name.toUpperCase();
             } else {
-                document.getElementById('auth-form').style.display = 'block';
-                document.getElementById('user-profile').style.display = 'none';
-                navUser.innerHTML = "زائر (غير مسجل)";
+                alert("برجاء إدخال الاسم والإيميل لتجربة النظام.");
             }
         }
-
-        function handleRegister() {
-            const name = document.getElementById('reg-name').value;
-            const email = document.getElementById('reg-email').value;
-            if (name && email) {
-                const user = { name, email, joinDate: new Date() };
-                localStorage.setItem('suqiaUser', JSON.stringify(user));
-                checkAuth();
-                alert("تم تسجيل حسابك وحفظه في الـ Database المحاكية!");
-            } else {
-                alert("يرجى إدخال البيانات كاملة");
-            }
-        }
-
-        function handleLogout() {
-            localStorage.removeItem('suqiaUser');
-            checkAuth();
-        }
-
-        // تشغيل فحص الدخول عند تحميل الصفحة
-        window.onload = checkAuth;
-
     </script>
 </body>
 </html>
