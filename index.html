@@ -2,143 +2,164 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <title>Suqia Africa AI | Professional CS Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suqia | Tech for Humanity</title>
-    <script src="https://tailwindcss.com"></script>
-    <script src="https://jsdelivr.net"></script>
-    <link rel="stylesheet" href="https://cloudflare.com""")/>>
-    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
-        body { font-family: 'Plus Jakarta Sans', 'Tajawal', sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .hero-mesh { background-color: #020617; background-image: radial-gradient(at 0% 0%, rgba(30, 58, 138, 0.5) 0, transparent 50%), radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.3) 0, transparent 50%); }
+        :root { --main: #00b4d8; --bg: #0b0f1a; --card: #161c2d; --text: #f0fdfa; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: var(--text); margin: 0; overflow-x: hidden; }
+        
+        /* Navigation */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: var(--card); border-bottom: 2px solid var(--main); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--main); font-family: 'Courier New', Courier, monospace; }
+        
+        /* Hero & Stats */
+        .hero { text-align: center; padding: 50px 20px; background: linear-gradient(to bottom, #0077b622, transparent); }
+        .live-counter { font-size: 4rem; font-weight: bold; color: var(--main); text-shadow: 0 0 15px var(--main); font-family: 'monospace'; }
+
+        .main-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; padding: 20px 5%; max-width: 1400px; margin: auto; }
+        .card { background: var(--card); border-radius: 15px; padding: 25px; border: 1px solid #2d3748; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+        /* Map UI */
+        #map { height: 450px; width: 100%; border-radius: 12px; border: 2px solid #2d3748; }
+
+        /* Auth System UI */
+        .form-group { margin-bottom: 15px; text-align: right; }
+        input { width: 100%; padding: 12px; background: #0b0f1a; border: 1px solid #4a5568; color: white; border-radius: 8px; margin-top: 5px; box-sizing: border-box; }
+        .btn { width: 100%; padding: 12px; background: var(--main); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn:hover { background: #0077b6; transform: translateY(-2px); }
+        .logout-btn { background: #e53e3e; margin-top: 20px; }
+
+        .impact-box { background: rgba(0, 180, 216, 0.1); padding: 20px; border-radius: 10px; border-right: 4px solid var(--main); display: none; }
+        
+        @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
-<body class="bg-[#020617] text-gray-100 selection:bg-blue-500">
+<body>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass mt-4 mx-auto max-w-5xl left-0 right-0 rounded-full px-6 py-3 flex justify-between items-center animate__animated animate__fadeInDown">
-        <div class="text-xl font-extrabold tracking-tighter text-blue-400">SUQIA.TECH <span class="text-[10px] bg-blue-500/20 px-2 py-1 rounded text-blue-300 ml-2 uppercase">Beta v2.0</span></div>
-        <div class="hidden md:flex gap-8 text-sm font-medium">
-            <a href="#mission" class="hover:text-blue-400 transition">المهمة</a>
-            <a href="#data" class="hover:text-blue-400 transition">البيانات الحية</a>
-            <a href="#impact" class="hover:text-blue-400 transition">الأثر الميداني</a>
-        </div>
-        <a href="https://github.com" class="bg-blue-600 hover:bg-blue-500 px-5 py-2 rounded-full text-sm font-bold transition shadow-lg shadow-blue-900/20">GitHub Source</a>
+    <nav>
+        <div class="logo"> > SUQIA_AFRICA_OS </div>
+        <div id="nav-user">جاري تحميل النظام...</div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="min-h-screen flex items-center justify-center pt-20 hero-mesh px-6">
-        <div class="max-w-4xl text-center">
-            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight animate__animated animate__fadeInUp">
-                نطوع <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">التكنولوجيا</span> لخدمة الإنسانية
-            </h1>
-            <p class="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto animate__animated animate__fadeInUp animate__delay-1s">
-                منصة برمجية لتحليل احتياجات المياه في المناطق النائية بأفريقيا ومصر، وربط الموارد بالاحتياجات الحقيقية عبر البيانات.
-            </p>
-            <div class="flex flex-wrap justify-center gap-4 animate__animated animate__fadeInUp animate__delay-2s">
-                <div class="glass p-6 rounded-2xl w-40">
-                    <div class="text-3xl font-bold text-blue-400">100%</div>
-                    <div class="text-xs text-gray-500 uppercase mt-2 italic tracking-widest">Transparency</div>
-                </div>
-                <div class="glass p-6 rounded-2xl w-40">
-                    <div class="text-3xl font-bold text-cyan-400">472</div>
-                    <div class="text-xs text-gray-500 uppercase mt-2 italic tracking-widest">Community Reach</div>
-                </div>
-            </div>
-        </div>
+    <section class="hero">
+        <div style="color: var(--main); font-weight: bold;">[ LIVE DATA FEED FROM AFRICA ]</div>
+        <div class="live-counter" id="main-counter">0</div>
+        <p>إجمالي لترات المياه المؤمنة لحظياً (محاكاة قاعدة البيانات)</p>
     </section>
 
-    <!-- Data Analytics Section (The CS Part) -->
-    <section id="data" class="py-24 px-6 bg-slate-950/50">
-        <div class="max-w-6xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="animate__animated animate__fadeInLeft">
-                    <h2 class="text-3xl font-bold mb-6">التحليل البياني للأثر (Live Data)</h2>
-                    <p class="text-gray-400 mb-6 leading-relaxed">
-                        بصفتي مبرمجاً، لا أكتفي بجمع التبرعات؛ بل أقوم ببناء نماذج بيانات لتتبع كفاءة كل بئر تم حفره وقياس العائد الاجتماعي لكل دولار يتم إنفاقه.
-                    </p>
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                            <span>تتبع عبر الأقمار الصناعية (GIS)</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-2 h-2 bg-cyan-500 rounded-full"></div>
-                            <span>خوارزميات تحسين الموارد</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="glass p-8 rounded-3xl animate__animated animate__fadeInRight">
-                    <canvas id="impactChart"></canvas>
-                </div>
-            </div>
+    <div class="main-grid">
+        <div class="card">
+            <h3><i class="fas fa-satellite"></i> نظام التتبع الجغرافي (Live Map)</h3>
+            <p style="color: #a0aec0; font-size: 0.9rem; margin-bottom: 15px;">خرائط تفاعلية حقيقية توضح مواقع الآبار وحالتها الفنية.</p>
+            <div id="map"></div>
         </div>
-    </section>
 
-    <!-- Project Gallery -->
-    <section id="impact" class="py-24 px-6">
-        <div class="max-w-6xl mx-auto text-center mb-16">
-            <h2 class="text-4xl font-bold">الأثر على الأرض</h2>
-            <div class="h-1 w-20 bg-blue-600 mx-auto mt-4 rounded-full"></div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="group relative overflow-hidden rounded-2xl aspect-square">
-                <img src="https://unsplash.com" class="object-cover w-full h-full group-hover:scale-110 transition duration-500 opacity-60 group-hover:opacity-100">
-                <div class="absolute bottom-0 p-6 bg-gradient-to-t from-black to-transparent w-full">
-                    <h4 class="font-bold">آبار مصر</h4>
-                    <p class="text-xs text-gray-400">تطوير البنية التحتية للمياه</p>
+        <div class="card">
+            <div id="auth-form">
+                <h3><i class="fas fa-fingerprint"></i> وصول المتطوعين (Authentication)</h3>
+                <div class="form-group">
+                    <label>الاسم</label>
+                    <input type="text" id="reg-name" placeholder="أدخل اسمك">
                 </div>
-            </div>
-            <div class="group relative overflow-hidden rounded-2xl aspect-square">
-                <img src="https://unsplash.com" class="object-cover w-full h-full group-hover:scale-110 transition duration-500 opacity-60 group-hover:opacity-100">
-                <div class="absolute bottom-0 p-6 bg-gradient-to-t from-black to-transparent w-full">
-                    <h4 class="font-bold">تطوع أفريقيا</h4>
-                    <p class="text-xs text-gray-400">توزيع الموارد الأساسية</p>
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="reg-email" placeholder="name@domain.com">
                 </div>
+                <button class="btn" onclick="handleRegister()">إنشاء حساب وحفظ البيانات</button>
+                <p style="font-size: 0.
+                    8rem; color: #a0aec0; margin-top: 10px;">* يتم حفظ البيانات في LocalStorage لمحاكاة Database.</p>
             </div>
-            <div class="group relative overflow-hidden rounded-2xl aspect-square">
-                <img src="https://unsplash.com" class="object-cover w-full h-full group-hover:scale-110 transition duration-500 opacity-60 group-hover:opacity-100">
-                <div class="absolute bottom-0 p-6 bg-gradient-to-t from-black to-transparent w-full">
-                    <h4 class="font-bold">التعليم والوعي</h4>
-                    <p class="text-xs text-gray-400">بناء قدرات المجتمعات المحلية</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="py-12 border-t border-white/5 text-center text-gray-500 text-sm">
-        <p>&copy; 2024 Amr Said | Future CS Student | Built with Code & Passion</p>
-    </footer>
+            <div id="user-profile" class="impact-box">
+                <h3><i class="fas fa-user-check"></i> لوحة تحكم المتطوع</h3>
+                <p>مرحباً، <span id="user-display-name" style="color: var(--main); font-weight: bold;"></span></p>
+                <div style="margin: 20px 0;">
+                    <small>أثرك المجتمعي:</small>
+                    <div style="font-size: 1.5rem;">رُويت <strong style="color: var(--main);">12</strong> أسرة اليوم</div>
+                </div>
+                <button class="btn logout-btn" onclick="handleLogout()">تسجيل الخروج</button>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Data Visualization Logic
-        const ctx = document.getElementById('impactChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['2020', '2021', '2022', '2023', '2024'],
-                datasets: [{
-                    label: 'المستفيدين (ألف)',
-                    data: [1.2, 2.5, 4.8, 8.2, 12.5],
-                    backgroundColor: 'rgba(59, 130, 246, 0.5)',
-                    borderColor: '#3b82f6',
-                    borderWidth: 2,
-                    borderRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#64748b' } },
-                    x: { grid: { display: false }, ticks: { color: '#64748b' } }
-                },
-                plugins: {
-                    legend: { labels: { color: '#f1f5f9', font: { family: 'Tajawal' } } }
-                }
-            }
+        // 1. نظام محاكاة قاعدة البيانات (Database Logic)
+        let totalWater = localStorage.getItem('totalWater') ? parseInt(localStorage.getItem('totalWater')) : 1450230;
+        
+        function updateCounter() {
+            totalWater += Math.floor(Math.random() * 5) + 1;
+            document.getElementById('main-counter').innerText = totalWater.toLocaleString();
+            localStorage.setItem('totalWater', totalWater);
+        }
+        setInterval(updateCounter, 2500);
+
+        // 2. نظام الخرائط الاحترافية (Interactive Map Logic)
+        // إحداثيات أفريقيا الافتراضية
+        const map = L.map('map').setView([5.0, 20.0], 3); 
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // إضافة نقاط (Markers) حقيقية
+        const wells = [
+            { name: "بئر النور", coords: [-13.25, 34.30], status: "يعمل بكفاءة", tech: "مضخة شمسية" },
+            { name: "بئر الكرامة", coords: [15.45, 18.73], status: "صيانة وقائية", tech: "يدوي متطور" },
+            { name: "بئر الأمل", coords: [17.60, 8.08], status: "متصل بالـ AI", tech: "نظام هجين" }
+        ];
+
+        wells.forEach(well => {
+            const marker = L.marker(well.coords).addTo(map);
+            marker.bindPopup(`
+                <div style="text-align:right; font-family:Cairo;">
+                    <b style="color:#00b4d8">${well.name}</b><br>
+                    الحالة: ${well.status}<br>
+                    التقنية: ${well.tech}<br>
+                    <button style="margin-top:5px; cursor:pointer">عرض التفاصيل</button>
+                </div>
+            `);
         });
+
+        // 3. نظام المستخدمين (Authentication Logic)
+        function checkAuth() {
+            const user = JSON.parse(localStorage.getItem('suqiaUser'));
+            const navUser = document.getElementById('nav-user');
+            if (user) {
+                document.getElementById('auth-form').style.display = 'none';
+                document.getElementById('user-profile').style.display = 'block';
+                document.getElementById('user-display-name').innerText = user.name;
+                navUser.innerHTML = <i class="fas fa-circle" style="color:#2ecc71; font-size:10px"></i> متصل: ${user.name};
+            } else {
+                document.getElementById('auth-form').style.display = 'block';
+                document.getElementById('user-profile').style.display = 'none';
+                navUser.innerHTML = "زائر (غير مسجل)";
+            }
+        }
+
+        function handleRegister() {
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            if (name && email) {
+                const user = { name, email, joinDate: new Date() };
+                localStorage.setItem('suqiaUser', JSON.stringify(user));
+                checkAuth();
+                alert("تم تسجيل حسابك وحفظه في الـ Database المحاكية!");
+            } else {
+                alert("يرجى إدخال البيانات كاملة");
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('suqiaUser');
+            checkAuth();
+        }
+
+        // تشغيل فحص الدخول عند تحميل الصفحة
+        window.onload = checkAuth;
+
     </script>
 </body>
 </html>
